@@ -14,7 +14,7 @@ export class StockItems implements OnInit{
 
   }
   ngOnInit(){
-    this.stock = new Stock('Apple', 'AAPL', 100, 80);
+    this.stock = new Stock('Apple', 'AAPL', 100, 80, 'NASDAQ');
   }
   addToFavorite(){
     console.log('Add to favorite');

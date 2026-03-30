@@ -1,1 +1,107 @@
-<p>create-stock works!</p>
+<h2>Create Stock Form</h2>
+<div class="form-group">
+<form (ngSubmit)="createStockk(stockForm)" #stockForm ="ngForm">
+    <div class="stock-name">
+        <h3>stock name is:</h3>
+        <i>The following element changes from green to red when it is invalid</i>
+        <br>
+        <input type="text" placeholder="stock name" required
+        name="stockName"
+        #stockName="ngModel"
+        [ngModel]="stock.name"
+        (ngModelChange)="stock.name = $event"
+        >
+        <!-- 
+        -Liên kết dữ liệu 2 chiều
+            ngmodel lấy dữ liệu từ File xử lý logic .ts lên html 
+            [ngModel] (Nhân viên đưa thư - Chiều RA)
+            (ngModelChange) (Nhân viên nhận thư - Chiều VÀO) -->
+
+        <!-- khi mà có sự kiện gì thay đổi thì angular sẽ phát hiện ra
+          và thêm các css cố định thêm .ng-valid khi giá trị hợp lệ .
+          mục đích để đổi màu thẻ input-->
+    </div>
+    @if (stockName.errors && stockName.errors['required']){
+        <div>
+         <p>stock name is mandatory</p>           
+        </div>
+    }
+    
+  
+            
+
+
+
+    <div class="stock-code">
+        <h3>stock code is:</h3>
+        <i>The following element changes from green to red when it has been modified</i>
+        <br>
+        <input type="text" placeholder="stock code"
+        minlength="2"
+        name="stockCode"
+        #stockCode="ngModel"
+        [ngModel]="stock.code"
+        (ngModelChange)="stock.code = $event"
+        >
+    </div>
+
+    @if (stockCode.dirty && stockCode.invalid){
+        <div>
+         <p>stock code is mandatory</p>           
+        </div>
+    }
+    @if (stockCode.errors?.['minlength']){
+        <div>
+         <p>stock code must be atleast of length 2</p>           
+        </div>
+    }
+
+    <div class="stock-price">
+        <h3>stock price is:</h3>
+        <i>The following element changes from green to red when it is visited by the user, regardless of change</i>
+        <br>
+        <input type="number" placeholder="stock price" required
+        name="stockPrice"
+        #stockPrice="ngModel"
+        [ngModel]="stock.price"
+        (ngModelChange)="stock.price = $event"
+        >
+    </div>
+
+
+    @if (stockPrice.dirty && stockPrice.invalid){
+        @if (stockPrice.errors?.['required']){
+            <div>
+                <p>stock Price is mandatory</p>           
+            </div>
+        }
+
+    }
+
+    <br>
+
+
+    <select name="stockExchange" class="stockExchange" [(ngModel)]="stock.exchange">
+        @for (exchange of exchanges; track exchange) {
+            <option [ngValue]="exchange">{{exchange}}</option>
+        }
+    </select>
+
+
+
+
+
+ <br>
+ <div class="checkbox-confirm">
+     <input type="checkbox" name="stockConfirm" [(ngModel)]="confirmed">
+     <h3>I confirm that the information provided above is accurate!</h3>
+  </div>
+  <br>
+  <button [disabled]="!confirmed" type="submit">Create</button>
+
+</form>
+
+</div>
+
+<b>Stock name is: </b>{{ stock | json }}
+<h3> Data has been confirmed: {{ confirmed }}  </h3>
