@@ -1,1 +1,19 @@
-<p>stock-list works!</p>
+<h2>list </h2>
+
+<app-create-stock (stockCreated)="onNewStock($event)"></app-create-stock>
+<div class="stock-list-container">
+    <!-- <app-stock-items 
+      *ngFor="let s of stocks" 
+      [stock]="s"> 
+    </app-stock-items>  cú pháp *ngfor lỗi thời rồi-->
+
+    <div class="stock-list-container">
+        @for (s of stocks; track s.code) {
+            <app-stock-items [stock]="s"></app-stock-items>
+        }
+    </div>
+    <!-- 
+track: Giúp Angular nhận diện chính xác từng item
+để tăng tốc độ và tránh vẽ lại giao diện không cần thiết.
+ -->
+</div>

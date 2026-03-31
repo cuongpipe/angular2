@@ -2,7 +2,6 @@
 <div class="form-group">
 <form (ngSubmit)="createStockk(stockForm)" #stockForm ="ngForm">
     <div class="stock-name">
-        <h3>stock name is:</h3>
         <i>The following element changes from green to red when it is invalid</i>
         <br>
         <input type="text" placeholder="stock name" required
@@ -33,7 +32,6 @@
 
 
     <div class="stock-code">
-        <h3>stock code is:</h3>
         <i>The following element changes from green to red when it has been modified</i>
         <br>
         <input type="text" placeholder="stock code"
@@ -57,7 +55,6 @@
     }
 
     <div class="stock-price">
-        <h3>stock price is:</h3>
         <i>The following element changes from green to red when it is visited by the user, regardless of change</i>
         <br>
         <input type="number" placeholder="stock price" required
@@ -105,3 +102,9 @@
 
 <b>Stock name is: </b>{{ stock | json }}
 <h3> Data has been confirmed: {{ confirmed }}  </h3>
+
+<!-- 
+[ngModel]: Đẩy data từ Code -> HTML.
+(ngModelChange): Đón data từ HTML -> Code.
+stock.price = $event: Là hành động "Lưu lại" dữ liệu vừa đón được.
+ -->

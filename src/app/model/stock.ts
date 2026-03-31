@@ -1,5 +1,5 @@
 export class Stock {
-    favorite: boolean = false;
+    favorite?: boolean = false;
 
     constructor(
         public name: string // ":" là khai báo kiểu dữ liệu cho biến

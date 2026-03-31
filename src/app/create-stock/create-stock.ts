@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormsModule , NgForm } from '@angular/forms';
 import { Stock } from '../model/stock';
 import { JsonPipe } from '@angular/common'; // chua json
 import { CommonModule } from '@angular/common'; // chua ng for if, class style
+import {Output} from '@angular/core';
+import {EventEmitter} from '@angular/core';
+
 @Component({
   selector: 'app-create-stock',
   standalone: true,
@@ -11,6 +14,7 @@ import { CommonModule } from '@angular/common'; // chua ng for if, class style
   styleUrl: './create-stock.css',
 })
 export class CreateStock {
+  @Output() stockCreated = new EventEmitter<Stock>();
   public stock: Stock;
   public confirmed = false;
   public exchanges = ['NYSE', 'NASDAQ', 'OTHER'];
@@ -26,6 +30,7 @@ export class CreateStock {
   }
   createStockk(stockForm: NgForm){
     console.log('Stock form', this.stock);
+    this.stockCreated.emit(Object.assign({}, this.stock));
     if(stockForm.valid){
       console.log('Creating stock', this.stock);
       this.confirm();

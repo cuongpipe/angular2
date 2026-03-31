@@ -1,0 +1,140 @@
+<p>Create Stock Form</p>
+
+<div class="form-group">
+  <form [formGroup]="stockForm" (ngSubmit)="onSubmit()">
+    <div class="stock-name">
+        <input type="text" 
+            placeholder="Stock Name"
+            name="stockName"
+            formControlName="name"
+        >
+        @if (stockForm.get('name')?.invalid && 
+                stockForm.get('name')?.dirty ||
+                stockForm.get('name')?.touched
+                ){
+                   <div>Stock Name is requiered</div> 
+                }
+        
+    </div>
+    <div class="stock-code">
+        <input type="text"
+            placeholder="Stock Code"
+            formControlName="code"
+        >
+        @if (stockForm.get('code')?.invalid && 
+        stockForm.get('code')?.dirty ||
+        stockForm.get('code')?.touched){
+            @if (stockForm.get('code')?.errors?.['required']){
+                <div> Stock code is requiered</div> 
+            }
+
+            @if (stockForm.get('code')?.errors?.['minlength']){
+                <div>Stock code must be at least 2 characters</div>
+            }
+
+        }
+    </div>
+
+    <div class="stock-price">
+        <input type="number"
+            placeholder="Stock Price"
+            formControlName="price">
+
+        @if (stockForm.get('price')?.invalid && 
+        stockForm.get('price')?.dirty ||
+        stockForm.get('price')?.touched){
+            @if (stockForm.get('price')?.errors?.['required']){
+                <div> Stock price is requiered</div> 
+            }
+
+            @if (stockForm.get('price')?.errors?.['min']){
+                <div>Stock price must be positive</div>
+            }
+
+        }
+
+    </div>
+
+
+
+    <button type="submit">Submit</button> <br>
+    <button type="button" (click)="resetForm()">Reset</button>
+    <button type="button" (click)="loadStockFromServer()">simulate stock load from server</button>
+    <button type="button" (click)="pathStockForm()">path stock form</button>
+ </form>
+</div>
+<p>Form control value: {{stockForm.value | json}}</p>
+<p>Form control status: {{stockForm.status | json}}</p>
+
+
+<!-- 
+
+FormGroup như Cái giỏ: Dùng để gom nhóm nhiều ô input lại với nhau.
+formControlName	như Cái nhãn: Dùng để gọi tên 1 ô nằm trong giỏ (phải có [formGroup]).
+[formControl]	như Sợi dây: Nối trực tiếp đến 1 ô độc lập, không cần nằm trong giỏ. 
+
+
+Dưới đây là tóm tắt ngắn gọn nhất về **Angular Reactive Forms** để bạn ghi chú:
+
+### 1. Bộ 3 thành phần chính (trong file `.ts`)
+* **`FormControl`**: Một ô nhập liệu duy nhất.
+* **`FormGroup`**: Cái giỏ chứa nhiều `FormControl`. Giúp quản lý cả một nhóm ô input (như một bộ hồ sơ).
+* **`FormBuilder`**: Dịch vụ giúp viết code tạo Form ngắn hơn (dùng mảng `[]` thay vì `new FormControl`).
+
+
+
+---
+
+### 2. Cách liên kết (trong file `.html`)
+* **`[formGroup]="tên_giỏ"`**: Gắn vào thẻ `<form>` để khai báo dùng giỏ nào.
+* **`formControlName="tên_ô"`**: Gắn vào thẻ `<input>` để chỉ định ô đó thuộc mục nào trong giỏ.
+
+---
+
+### 3. Cách viết chuẩn (FormBuilder)
+Sử dụng mảng để khai báo: `[giá_trị_đầu, [danh_sách_validators]]`.
+
+```typescript
+this.form = this.fb.group({
+  name: ['', Validators.required],
+  code: ['', [Validators.required, Validators.minLength(2)]]
+});
+```
+
+---
+
+### 4. Kiểm tra trạng thái & Bắt lỗi
+* **`invalid`**: Ô đang bị sai quy định.
+* **`dirty`**: Người dùng đã gõ chữ (dù sau đó xóa hết).
+* **`touched`**: Người dùng đã nhấn vào rồi nhấn ra ngoài.
+
+**Cách bắt lỗi chuyên nghiệp nhất:**
+Dùng hàm **`hasError('tên_lỗi')`** thay vì dùng dấu chấm (`.`) hay ngoặc vuông (`[]`).
+
+```html
+@if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+  <div>Bắt buộc nhập tên!</div>
+}
+```
+
+
+
+---
+
+### 5. Phân biệt Trạng thái Ô Input
+| Trạng thái | Ý nghĩa |
+| :--- | :--- |
+| **`valid`** | Hợp lệ (Không có lỗi). |
+| **`invalid`** | Không hợp lệ (Có ít nhất 1 lỗi). |
+| **`pending`** | Đang chờ xử lý (Thường dùng cho Validation bất đồng bộ). |
+| **`pristine`** | Ô còn "zin", chưa hề bị chạm vào để gõ. |
+
+
+
+### 6. Lưu ý quan trọng
+* **Dự án Standalone**: Phải `import [ReactiveFormsModule]` vào mảng `imports` của từng Component.
+* **Cú pháp mới**: Dùng `@if` thay cho `*ngIf` để code sạch và nhanh hơn.
+* **FormData**: Không phải cách làm form, chỉ là cách "đóng gói" để gửi dữ liệu lên Server (dùng khi cần upload file).
+
+
+-->
