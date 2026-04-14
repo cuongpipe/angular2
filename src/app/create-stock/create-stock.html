@@ -7,8 +7,7 @@
         <input type="text" placeholder="stock name" required
         name="stockName"
         #stockName="ngModel"
-        [ngModel]="stock.name"
-        (ngModelChange)="stock.name = $event"
+        [(ngModel)]="stock.name"
         >
         <!-- 
         -Liên kết dữ liệu 2 chiều
@@ -27,10 +26,6 @@
     }
     
   
-            
-
-
-
     <div class="stock-code">
         <i>The following element changes from green to red when it has been modified</i>
         <br>
@@ -38,8 +33,7 @@
         minlength="2"
         name="stockCode"
         #stockCode="ngModel"
-        [ngModel]="stock.code"
-        (ngModelChange)="stock.code = $event"
+        [(ngModel)]="stock.code"
         >
     </div>
 
@@ -60,8 +54,7 @@
         <input type="number" placeholder="stock price" required
         name="stockPrice"
         #stockPrice="ngModel"
-        [ngModel]="stock.price"
-        (ngModelChange)="stock.price = $event"
+        [(ngModel)]="stock.price"
         >
     </div>
 
@@ -83,8 +76,6 @@
             <option [ngValue]="exchange">{{exchange}}</option>
         }
     </select>
-
-
 
 
 

@@ -1,4 +1,4 @@
-<h2>list </h2>
+<h2>Stock List</h2>
 
 <div class="stock-list-container">
     <!-- <app-stock-items 
@@ -8,7 +8,10 @@
 
     <div class="stock-list-container">
         @for (s of stocks; track s.code) {
-            <app-stock-items [stock]="s"></app-stock-items>
+            <app-stock-items 
+                [stock]="s" 
+                (toogleFavorite) = "onToggleFavorite($event)">
+            </app-stock-items>
         }
     </div>
     

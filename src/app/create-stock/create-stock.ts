@@ -8,13 +8,17 @@ import {EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-create-stock',
-  standalone: true,
+
+  
   imports: [FormsModule, JsonPipe , CommonModule],
   templateUrl: './create-stock.html',
   styleUrl: './create-stock.css',
 })
 export class CreateStock {
+  //event blindigng
   @Output() stockCreated = new EventEmitter<Stock>();
+  //stock Created là biến và  là tên của event (sự kiện) để cha theo dõi
+  //eventemmiiter là class gửi dữ liệu và kiểu dữ liệu gửi đi là stock;
   public stock: Stock;
   public confirmed = false;
   public exchanges = ['NYSE', 'NASDAQ', 'OTHER'];

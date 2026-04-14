@@ -10,5 +10,6 @@ import { StockList } from './stock-list/stock-list';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('stock-market');
+  title = 'Stock Market App';
+  //protected readonly title = signal('stock-market');
 } 
