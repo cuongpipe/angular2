@@ -32,34 +32,40 @@
 
 
 
-<!-- BACKDROP -->
-<div class="modal-backdrop" *ngIf="isDetailOpen || isUpdateOpen"></div>
+<!-- popup -->
+<div class="dialog-popup" *ngIf="isDetailOpen || isUpdateOpen">
 
-<!-- DETAIL DIALOG -->
-<div class="modal" *ngIf="isDetailOpen">
-  <h3>Stock Details</h3>
+  <!-- DETAIL  -->
 
-  <p><b>Name:</b> {{ selectedStock?.name }}</p>
-  <p><b>Code:</b> {{ selectedStock?.code }}</p>
-  <p><b>Price:</b> {{ selectedStock?.price }}</p>
-  <p><b>Previous:</b> {{ selectedStock?.previousPrice }}</p>
-  <p><b>Exchange:</b> {{ selectedStock?.exchange }}</p>
+  @if(isDetailOpen){
+    <div class="modal" >
+      <h3>Stock Details</h3>
 
-  <button (click)="closeDialog()">Close</button>
-</div>
+      <p><b>Name:</b> {{ selectedStock?.name }}</p>
+      <p><b>Code:</b> {{ selectedStock?.code }}</p>
+      <p><b>Price:</b> {{ selectedStock?.price }}</p>
+      <p><b>Previous:</b> {{ selectedStock?.previousPrice }}</p>
+      <p><b>Exchange:</b> {{ selectedStock?.exchange }}</p>
 
-<!-- UPDATE DIALOG -->
-<div class="modal" *ngIf="isUpdateOpen">
-  <h3>Update Stock</h3>
+      <button (click)="closeDialog()">Close</button>
+    </div>
+  }
 
-  <input [(ngModel)]="selectedStock!.name" placeholder="Name">
-  <input [(ngModel)]="selectedStock!.price" type="number" placeholder="Price">
-  <input [(ngModel)]="selectedStock!.exchange" placeholder="Exchange">
+  <!-- UPDATE -->
+ @if(isUpdateOpen){
+  <div class="modal">
+    <h3>Update Stock</h3>
 
-  <div style="margin-top: 10px;">
-    <button (click)="saveStock()">Save</button>
-    <button (click)="closeDialog()">Cancel</button>
+    <input [(ngModel)]="selectedStock!.name" placeholder="Name">
+    <input [(ngModel)]="selectedStock!.price" type="number" placeholder="Price">
+    <input [(ngModel)]="selectedStock!.exchange" placeholder="Exchange">
+
+    <div style="margin-top: 10px;">
+      <button (click)="saveStock()">Save</button>
+      <button (click)="closeDialog()">Cancel</button>
+    </div>
   </div>
+ }
 </div>
 
 

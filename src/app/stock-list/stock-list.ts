@@ -55,14 +55,26 @@ export class StockList implements OnInit {
 
   onUpdateStock(stock: Stock) {
     this.isDetailOpen = false;
-    this.selectedStock = { ...stock };
     this.isUpdateOpen = true;
+    this.selectedStock = {
+      name: stock.name,
+      code: stock.code,
+      price: stock.price,
+      exchange: stock.exchange,
+      previousPrice: stock.previousPrice
+    };
   }
 
   onViewDetails(stock: Stock) {
     this.isUpdateOpen = false;
-    this.selectedStock = { ...stock };
     this.isDetailOpen = true;
+    this.selectedStock = {
+      name: stock.name,
+      code: stock.code,
+      price: stock.price,
+      exchange: stock.exchange,
+      previousPrice: stock.previousPrice
+    };
   }
 
   saveStock() {
