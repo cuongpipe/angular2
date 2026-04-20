@@ -1,54 +1,20 @@
-<div class="stock-container">
-    <div class="name"><h3>{{stock.name}}</h3> - <h4>({{stock.code}})</h4></div>
-    <div class="price"
-        [class]="stock.isPositiveChange() ? 'positive' : 'negative'">
-        ${{stock.price}}
-    </div>
-    <button (click) = "onDeleteStock($event)">delete</button>
-    <button>update</button>
-    @if(stock.favorite){
-        <button (click)="onToggleFavorite($event)">Remove from Favorite</button>
-    }
-    @else{
-        <button (click)="onToggleFavorite($event)">Add to Favorite</button>
-    }
-</div>
- 
-
- 
-<!--
-
-1. {{ }} (Nội suy)
-Chiều: Code ➔ Màn hình.
-
-Dùng: Để hiện chữ (text).
-
-Ví dụ: <span>{{ name }}</span>
-
-2. [ ] (Property)
-Chiều: Code ➔ Màn hình.
-
-Dùng: Để gán thuộc tính cho thẻ (ẩn/hiện, màu sắc, link ảnh).
-
-Ví dụ: <img [src]="url">
-
-3. ( ) (Event)
-Chiều: Màn hình ➔ Code.
-
-Dùng: Để xử lý hành động (bấm, gõ).
-
-Ví dụ: <button (click)="save()">
-
-
-
-
-{{ }} được gọi là Interpolation (Nội suy văn bản)
-
-{{ }} là cú pháp đổ dữ liệu từ code ra màn hình.
-
-Cách hoạt động: Nó tìm tên biến trong file .ts, 
-lấy giá trị rồi hiển thị vào đúng vị trí đó ở file .html.
-
-Ví dụ: Code có name = 'Quy Nhơn', 
-khi viết {{ name }} thì màn hình hiện chữ Quy Nhơn.
--->
+<ng-container>
+  <td>{{ stock.name }}</td>
+  <td>{{ stock.code }}</td>
+  <td 
+    [class.positive]="isPositive()"
+    [class.negative]="!isPositive()">
+    {{stock.price}}
+  </td>
+  <td>{{ stock.exchange }}</td>
+  <td>
+    <button (click)="onToggleFavorite()">
+      {{ stock.favorite ? 'Renove to favorite' : 'Add to Favorite' }}
+    </button>
+  </td>
+  <td>
+    <button (click)="onView()">View Details</button>
+    <button (click)="onUpdate()">Update</button>
+    <button (click)="onDelete()">Delete</button>
+  </td>
+</ng-container>

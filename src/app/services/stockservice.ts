@@ -64,4 +64,12 @@ export class Stockservice {
     }
     return of(stock);
   }
+  searchStocks(term: string): Observable<Stock[]> {
+    const results = this.stocks.filter(stock =>
+      stock.name.toLowerCase().includes(term.toLowerCase()) ||
+      stock.code.toLowerCase().includes(term.toLowerCase())
+    );
+    return of(results);
+  }
+  
 }

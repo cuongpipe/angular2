@@ -9,10 +9,10 @@ export class Stock {
         , public exchange: string
     ){}
 
-    isPositiveChange(): boolean{
-        return this.price >= this.previousPrice;
-            //nếu giá hiện tại price >= giá trước đó previus price
-            //thì positiveChange = true
-            //ngược lại positiveChange = false
-    }
+    // get isPositiveChange(): boolean{
+    //     return this.price >= this.previousPrice;
+    //         //nếu giá hiện tại price >= giá trước đó previus price
+    //         //thì positiveChange = true
+    //         //ngược lại positiveChange = false
+    // }
 }
